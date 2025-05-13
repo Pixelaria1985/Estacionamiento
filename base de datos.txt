@@ -1,0 +1,151 @@
+--
+-- Base de datos: `estacionamiento`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `parking_logs`
+--
+
+CREATE TABLE `parking_logs` (
+  `id` int(11) NOT NULL,
+  `slot_id` int(11) DEFAULT NULL,
+  `vehicle_type_id` int(11) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `amount_paid` decimal(10,2) DEFAULT NULL,
+  `license_plate` varchar(20) DEFAULT NULL,
+  `brand` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `parking_logs`
+--
+
+INSERT INTO `parking_logs` (`id`, `slot_id`, `vehicle_type_id`, `start_time`, `end_time`, `amount_paid`, `license_plate`, `brand`) VALUES
+(3, 1, 2, '2025-05-12 13:28:48', '2025-05-12 22:29:49', 6000.00, 'XXX 266', 'Chevrolet'),
+(4, 3, 2, '2025-05-13 09:02:34', '2025-05-13 13:33:19', 2000.00, 'PPP 256', 'Chevrolet'),
+(5, 2, 4, '2025-05-13 01:03:07', '2025-05-13 13:34:51', 540.00, 'sin 000', 'Aurorita'),
+(6, 9, 3, '2025-05-13 11:15:29', '2025-05-13 13:46:15', 400.00, 'PPP 123', 'Honda');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `parking_slots`
+--
+
+CREATE TABLE `parking_slots` (
+  `id` int(11) NOT NULL,
+  `slot_name` varchar(10) DEFAULT NULL,
+  `vehicle_type_id` int(11) DEFAULT NULL,
+  `is_occupied` tinyint(1) DEFAULT 0,
+  `current_log_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `parking_slots`
+--
+
+INSERT INTO `parking_slots` (`id`, `slot_name`, `vehicle_type_id`, `is_occupied`, `current_log_id`) VALUES
+(1, 'A1', 1, 0, NULL),
+(2, 'A2', 1, 0, NULL),
+(3, 'B1', 2, 0, NULL),
+(4, 'B2', 2, 0, NULL),
+(5, 'M1', 3, 0, NULL),
+(6, 'M2', 3, 0, NULL),
+(7, 'BIC1', 4, 0, NULL),
+(8, 'BIC2', 4, 0, NULL),
+(9, 'A3', 1, 0, NULL),
+(10, 'A4', 1, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vehicle_types`
+--
+
+CREATE TABLE `vehicle_types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `rate_per_hour` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `vehicle_types`
+--
+
+INSERT INTO `vehicle_types` (`id`, `name`, `rate_per_hour`) VALUES
+(1, 'Auto', 100.00),
+(2, 'Camioneta', 200.00),
+(3, 'Moto', 50.00),
+(4, 'Bicicleta', 30.00);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `parking_logs`
+--
+ALTER TABLE `parking_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `slot_id` (`slot_id`),
+  ADD KEY `vehicle_type_id` (`vehicle_type_id`);
+
+--
+-- Indices de la tabla `parking_slots`
+--
+ALTER TABLE `parking_slots`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vehicle_type_id` (`vehicle_type_id`);
+
+--
+-- Indices de la tabla `vehicle_types`
+--
+ALTER TABLE `vehicle_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `parking_logs`
+--
+ALTER TABLE `parking_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `parking_slots`
+--
+ALTER TABLE `parking_slots`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `vehicle_types`
+--
+ALTER TABLE `vehicle_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `parking_logs`
+--
+ALTER TABLE `parking_logs`
+  ADD CONSTRAINT `parking_logs_ibfk_1` FOREIGN KEY (`slot_id`) REFERENCES `parking_slots` (`id`),
+  ADD CONSTRAINT `parking_logs_ibfk_2` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_types` (`id`);
+
+--
+-- Filtros para la tabla `parking_slots`
+--
+ALTER TABLE `parking_slots`
+  ADD CONSTRAINT `parking_slots_ibfk_1` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_types` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
