@@ -1,0 +1,21 @@
+Eres un experto en programacion en php y mysql y Necesito crear un sistema de aparcamiento con php y mysql en donde primero
+
+- Cada vehiculo tendra un valor distinto por ejemplo un auto la hora sera de 100 pesos, una camioneta de 200 pesos, una moto de 50 pesos y una bicicleta de 30 pesos, igual estos valores se podran cambiar en una pagina en donde pueda modificar los valores de precio.
+
+- debe haber una pagina en donde me muestre todo los lugares de estacionamiento que haya tanto para autos como para camionetas habra un lugar especial para ellos y lo mismo pasara con las bicicletas con las motos los lugares vacios deben aparecer en verde y los ocupados en rojo, uno podria de presionar tanto los vacios como los llenos y poder cargar un nuevo vehiculo en ese lugar y cuando se cargue se ponga en rojo y empiece a correr el tiempo cuando se apriete en uno rojo poder liberarlo y que me aparezca el monto que debe de pagar el usuario que aparco cuando ponga pagado se pondra en verde y estaria listo para ser utilizado nuevamente.
+
+- Debe haber una pagina con los registros que hubo aparcado y el dinero que se recaudo en ese dia.
+
+
+Algunos datos mas:
+
+¿Querés que te prepare el SQL inicial + scripts PHP base para cada módulo?
+si
+
+¿Qué frontend estás pensando usar (HTML/CSS puro, Bootstrap, algo más moderno como Vue o React)?
+El frontend que sea con bootstrap y php 
+
+¿El proyecto se usará localmente o en servidor online (hosting)?
+Quiero hacerlo local lo voy hacer con xammp mysql
+
+Si hay algo mas que agregar decime y lo vemos para mejorar el sistema
